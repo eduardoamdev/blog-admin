@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Navbar from "@/app/components/Navbar";
-import { createUserAction } from "@/app/actions/signup/createUserAction";
+import { signupAction } from "@/app/actions/signup/signupAction";
 
 export default function Signup() {
   const [message, setMessage] = useState("");
@@ -12,7 +12,7 @@ export default function Signup() {
 
     const password = formData.get("password");
 
-    const message: string = await createUserAction(username, password);
+    const message: string = await signupAction(username, password);
 
     setMessage(message);
   }

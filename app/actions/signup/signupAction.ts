@@ -3,7 +3,7 @@
 import bcrypt from "bcryptjs";
 import { connectToDB, dbClient } from "@/app/lib/database";
 
-export async function createUserAction(username: any, password: any) {
+export async function signupAction(username: any, password: any) {
   try {
     console.log(`Creating user with username ${username}`);
 

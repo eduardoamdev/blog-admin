@@ -7,7 +7,7 @@ import { createUserAction } from "@/app/actions";
 export default function Signup() {
   const [message, setMessage] = useState("");
 
-  async function createUser(formData: FormData) {
+  async function submitUserAction(formData: FormData) {
     const username = formData.get("username");
 
     const password = formData.get("password");
@@ -22,7 +22,7 @@ export default function Signup() {
       <Navbar />
       <div>
         <h2>Signup</h2>
-        <form action={createUser}>
+        <form action={submitUserAction}>
           <label>Username</label>
           <input type="text" name="username" placeholder="example@gmail.com" />
           <label>Password</label>

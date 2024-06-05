@@ -6,10 +6,10 @@ export default function Navbar(props: any) {
       {!props.authenticated ? (
         <nav>
           <span>
-            <Link href="/auth/signup">Signup</Link>
+            <Link href="/signup">Signup</Link>
           </span>
           <span>
-            <Link href="/auth/login">Login</Link>
+            <Link href="/login">Login</Link>
           </span>
         </nav>
       ) : (

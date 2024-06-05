@@ -15,7 +15,7 @@ export async function createUserAction(username: any, password: any) {
     if (!username || !password) {
       console.log(`User data not provided properly`);
 
-      return "Please provide an username and password";
+      return "Please provide username and password";
     }
 
     await connectToDB();
@@ -59,7 +59,7 @@ export async function loginAction(username: any, password: any) {
 
       return {
         success: false,
-        message: "Please provide an username and password",
+        message: "Please provide username and password",
       };
     }
 

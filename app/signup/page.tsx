@@ -24,7 +24,7 @@ export default function Signup() {
         <h2>Signup</h2>
         <form action={submitUserAction}>
           <label>Username</label>
-          <input type="text" name="username" placeholder="example@gmail.com" />
+          <input type="text" name="username" placeholder="usuario" />
           <label>Password</label>
           <input type="text" name="password" placeholder="password" />
           <button type="submit" value="Submit">

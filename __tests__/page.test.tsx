@@ -2,8 +2,8 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "../app/page";
 
-describe("Page", () => {
-  it("Renders", () => {
+describe("Home page test", () => {
+  it("Renders with title and navigation links", () => {
     render(<Page />);
 
     const loginLinkText = screen.getByText("Login").textContent;

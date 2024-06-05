@@ -2,45 +2,22 @@
 
 import { navigateAction } from "@/app/actions";
 import Navbar from "@/app/components/Navbar";
-import { FormEvent } from "react";
 import { useState } from "react";
+import { loginAction } from "@/app/actions";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
   const [message, setMessage] = useState("");
 
-  const handleInput = (event: any) => {
-    const fieldName = event.target.name;
+  async function submitUserAction(formData: FormData) {
+    const username = formData.get("username");
 
-    const fieldValue = event.target.value;
+    const password = formData.get("password");
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldValue,
-    }));
-  };
+    const response = await loginAction(username, password);
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    if (response.success) navigateAction("/admin/home");
 
-    try {
-      const response = await fetch("/routes/auth/login", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!data.success) throw new Error(data.message);
-
-      navigateAction("/admin/home");
-    } catch (error: any) {
-      setMessage(error.message);
-    }
+    setMessage(response.message);
   }
 
   return (
@@ -48,21 +25,11 @@ export default function Login() {
       <Navbar />
       <div>
         <h2>Login</h2>
-        <form onSubmit={submit}>
+        <form action={submitUserAction}>
           <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            onChange={handleInput}
-            placeholder="example@gmail.com"
-          />
+          <input type="text" name="username" placeholder="example@gmail.com" />
           <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            onChange={handleInput}
-            placeholder="pass123"
-          />
+          <input type="text" name="password" placeholder="pass123" />
           <button type="submit" value="Submit">
             Submit
           </button>

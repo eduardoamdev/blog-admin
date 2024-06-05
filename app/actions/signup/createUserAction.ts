@@ -37,7 +37,7 @@ export async function createUserAction(username: any, password: any) {
 
     return "Successful signup";
   } catch (error: any) {
-    console.error(
+    console.log(
       `Error while creating user with username ${username}: ${error.message}`
     );
 

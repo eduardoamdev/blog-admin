@@ -55,7 +55,7 @@ export async function loginAction(username: any, password: any) {
       success: true,
     };
   } catch (error: any) {
-    console.error(
+    console.log(
       `Error while logging in user with username ${username}: ${error.message}`
     );
 

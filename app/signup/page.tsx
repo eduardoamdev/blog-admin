@@ -1,8 +1,8 @@
 "use client";
 
-import Navbar from "@/app/components/Navbar";
 import { useState } from "react";
-import { createUserAction } from "@/app/actions";
+import Navbar from "@/app/components/Navbar";
+import { createUserAction } from "@/app/actions/signup/createUserAction";
 
 export default function Signup() {
   const [message, setMessage] = useState("");

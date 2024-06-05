@@ -1,9 +1,9 @@
 "use client";
 
-import { navigateAction } from "@/app/actions";
-import Navbar from "@/app/components/Navbar";
 import { useState } from "react";
-import { loginAction } from "@/app/actions";
+import Navbar from "@/app/components/Navbar";
+import { navigateAction } from "@/app/actions/navigation/navigateAction";
+import { loginAction } from "@/app/actions/login/loginAction";
 
 export default function Login() {
   const [message, setMessage] = useState("");

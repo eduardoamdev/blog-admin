@@ -8,12 +8,15 @@ const dbConfig: ClientConfig = {
   database: process.env.DB_NAME,
 };
 
-export const dbClient = new Client(dbConfig);
+export const dbClient: any = new Client(dbConfig);
 
 export const connectToDB = async () => {
   try {
-    await dbClient.connect();
-    console.log("Connected to database");
+    if (!dbClient._connected) {
+      await dbClient.connect();
+
+      console.log("Connected to database");
+    }
   } catch (error: any) {
     console.error(
       `There is the following database connection error: ${error.message}`

@@ -5,7 +5,7 @@ import { connectToDB, dbClient } from "@/app/lib/database";
 
 export async function loginAction(username: any, password: any) {
   try {
-    console.log(`Logging in user ${username}`);
+    console.log(`Logging user ${username}`);
 
     if (!username || !password) {
       console.log(`Login data not provided for user ${username}`);

@@ -49,7 +49,7 @@ describe("signupAction test", () => {
     expect(response).toEqual("Successful signup");
   });
 
-  it("May return a string 'Successful signup' in case of finding an existing user with that name in the database", async () => {
+  it("May return a string 'Test error' in case of an error thrown in the try", async () => {
     const response = await signupAction("x", "x");
 
     expect(response).toEqual("Test error");

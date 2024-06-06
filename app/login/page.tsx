@@ -27,7 +27,7 @@ export default function Login() {
         <h2>Login</h2>
         <form action={submitUserAction}>
           <label>Username</label>
-          <input type="text" name="username" placeholder="usuario" />
+          <input type="text" name="username" placeholder="username" />
           <label>Password</label>
           <input type="text" name="password" placeholder="pass123" />
           <button type="submit" value="Submit">

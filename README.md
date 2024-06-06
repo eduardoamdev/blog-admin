@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a tracker that allows users to follow the state of their investments.
+API for managing the content of a personal blog.
 
 ## Creation of the project
 

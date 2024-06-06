@@ -3,16 +3,34 @@
 import { useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import { signupAction } from "@/app/actions/signup/signupAction";
+import { FormEvent } from "react";
 
 export default function Signup() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
   const [message, setMessage] = useState("");
 
-  async function submitUserAction(formData: FormData) {
-    const username = formData.get("username");
+  const handleInput = (event: any) => {
+    const fieldName = event.target.name;
 
-    const password = formData.get("password");
+    const fieldValue = event.target.value;
 
-    const message: string = await signupAction(username, password);
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
+  };
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const message: string = await signupAction(
+      formData.username,
+      formData.password
+    );
 
     setMessage(message);
   }
@@ -22,11 +40,21 @@ export default function Signup() {
       <Navbar />
       <div>
         <h2>Signup</h2>
-        <form action={submitUserAction}>
+        <form onSubmit={submit}>
           <label>Username</label>
-          <input type="text" name="username" placeholder="username" />
+          <input
+            type="text"
+            name="username"
+            onChange={handleInput}
+            placeholder="username"
+          />
           <label>Password</label>
-          <input type="text" name="password" placeholder="password" />
+          <input
+            type="text"
+            name="password"
+            onChange={handleInput}
+            placeholder="password"
+          />
           <button type="submit" value="Submit">
             Submit
           </button>

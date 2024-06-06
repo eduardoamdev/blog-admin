@@ -1,23 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { FormEvent } from "react";
 import Navbar from "@/app/components/Navbar";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { loginAction } from "@/app/actions/login/loginAction";
 
 export default function Login() {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
   const [message, setMessage] = useState("");
 
-  async function submitUserAction(formData: FormData) {
-    const username = formData.get("username");
+  const handleInput = (event: any) => {
+    const fieldName = event.target.name;
 
-    const password = formData.get("password");
+    const fieldValue = event.target.value;
 
-    const response = await loginAction(username, password);
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
+  };
 
-    if (response.success) navigateAction("/admin/home");
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    setMessage(response.message);
+    const response = await loginAction(formData.username, formData.password);
+
+    if (!response.success) {
+      setMessage(response.message);
+
+      return;
+    }
+
+    navigateAction("/admin/home");
   }
 
   return (
@@ -25,11 +44,21 @@ export default function Login() {
       <Navbar />
       <div>
         <h2>Login</h2>
-        <form action={submitUserAction}>
+        <form onSubmit={submit}>
           <label>Username</label>
-          <input type="text" name="username" placeholder="username" />
+          <input
+            type="text"
+            name="username"
+            onChange={handleInput}
+            placeholder="username"
+          />
           <label>Password</label>
-          <input type="text" name="password" placeholder="pass123" />
+          <input
+            type="text"
+            name="password"
+            onChange={handleInput}
+            placeholder="pass123"
+          />
           <button type="submit" value="Submit">
             Submit
           </button>

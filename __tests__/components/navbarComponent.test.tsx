@@ -17,8 +17,11 @@ describe("Navbar component test", () => {
   it("Renders the corresponding Navbar if props.authenticated", () => {
     render(<Navbar authenticated="true" />);
 
+    const newArticleLinkText = screen.getByText("New article").textContent;
+
     const logoutLinkText = screen.getByText("Logout").textContent;
 
+    expect(newArticleLinkText).toBeDefined();
     expect(logoutLinkText).toBeDefined();
   });
 });

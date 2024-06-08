@@ -5,7 +5,7 @@ import { FormEvent } from "react";
 import Navbar from "@/app/components/Navbar";
 import { postArticleAction } from "@/app/actions/articles/postArticleAction";
 
-export default function Login() {
+export default function NewArticle() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",

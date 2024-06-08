@@ -15,6 +15,9 @@ export default function Navbar(props: any) {
       ) : (
         <nav>
           <span>
+            <Link href="/admin/articles">Articles</Link>
+          </span>
+          <span>
             <Link href="/admin/articles/new">New article</Link>
           </span>
           <span>

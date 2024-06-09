@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
 
 export async function postArticleAction(title: any, content: any) {
@@ -21,6 +22,8 @@ export async function postArticleAction(title: any, content: any) {
     await dbClient.query(
       `insert into admin.articles (title, content) values ('${title}', '${content}')`
     );
+
+    revalidateTag("/admin/articles");
 
     console.log(`Article with title ${title} has been posted successfully`);
 

@@ -14,7 +14,9 @@ export default async function Articles() {
 
     connectToDB();
 
-    const articles = await dbClient.query("select * from admin.articles");
+    const articles = await dbClient.query(
+      "select a.title from admin.articles a"
+    );
 
     console.log("Articles have been fetched successfully");
 
@@ -24,8 +26,6 @@ export default async function Articles() {
 
     info = { ...info, success: false, message: error.message };
   }
-
-  console.log(info);
 
   return (
     <main className={styles.reset}>
@@ -37,7 +37,6 @@ export default async function Articles() {
             {info.articles.map((article: any) => (
               <div key={article.title}>
                 <span>{article.title}</span>
-                <span>{article.content}</span>
               </div>
             ))}
           </div>

@@ -16,11 +16,9 @@ jest.mock("../../../app/lib/database", () => {
             rows: [
               {
                 title: "Article 1",
-                content: "Content 1",
               },
               {
                 title: "Article 2",
-                content: "Content 2",
               },
             ],
           };
@@ -44,9 +42,9 @@ describe("articles page test", () => {
   it("Renders articles", async () => {
     render(await Page());
 
-    const article1Content = screen.getByText("Content 1").textContent;
+    const article1Title = screen.getByText("Article 1").textContent;
 
-    expect(article1Content).toBeDefined();
+    expect(article1Title).toBeDefined();
   });
 
   it("Renders error message", async () => {

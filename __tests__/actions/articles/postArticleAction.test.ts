@@ -1,3 +1,7 @@
+jest.mock("next/cache", () => ({
+  revalidateTag: jest.fn(),
+}));
+
 jest.mock("../../../app/lib/database", () => ({
   connectToDB: jest.fn(),
   dbClient: {

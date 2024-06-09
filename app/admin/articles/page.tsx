@@ -36,7 +36,9 @@ export default async function Articles() {
           <div>
             {info.articles.map((article: any) => (
               <div key={article.title}>
-                <span>{article.title}</span>
+                <a href={`/admin/articles/${article.title}`}>
+                  <span>{article.title}</span>
+                </a>
               </div>
             ))}
           </div>

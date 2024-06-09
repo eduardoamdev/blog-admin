@@ -38,7 +38,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "../../../app/admin/articles/page";
 
-describe("articles page test", () => {
+describe("Articles page test", () => {
   it("Renders articles", async () => {
     render(await Page());
 

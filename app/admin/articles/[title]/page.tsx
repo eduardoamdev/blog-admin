@@ -1,5 +1,4 @@
 import { connectToDB, dbClient } from "@/app/lib/database";
-import styles from "@/app/ui/home.module.css";
 import Navbar from "../../../components/Navbar";
 
 import { NextPageContext } from "next";
@@ -41,7 +40,7 @@ export default async function Article({ params }: ArticleProps) {
   }
 
   return (
-    <main className={styles.reset}>
+    <main>
       <Navbar authenticated="true" />
       <div>
         <h2>Article</h2>

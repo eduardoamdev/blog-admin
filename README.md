@@ -17,3 +17,7 @@ npx create-next-app@latest blog-admin
 ```sh
 npm run dev
 ```
+
+## Tailwind instalation
+
+https://nextjs.org/docs/app/building-your-application/styling/tailwind-css

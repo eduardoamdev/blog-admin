@@ -32,12 +32,6 @@ export default function Navbar(props: any) {
       return (
         <div className="ml-4 flex items-center space-x-4">
           <Link
-            href="/signup"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2"
-          >
-            Signup
-          </Link>
-          <Link
             href="/login"
             className="text-white hover:bg-white hover:text-black rounded-lg p-2"
           >

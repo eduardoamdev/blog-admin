@@ -6,11 +6,9 @@ export default function Home() {
       <Navbar />
       <div>
         <div className="pt-20">
-          <div className="pt-20">
-            <h1 className="text-center non-italic font-bold pt-20 text-3xl md:text-5xl lg:text-7xl">
-              Blog Admin
-            </h1>
-          </div>
+          <h1 className="text-center text-white non-italic font-bold pt-20 text-3xl md:text-5xl lg:text-7xl">
+            Blog Admin
+          </h1>
         </div>
       </div>
     </main>

@@ -10,10 +10,14 @@ export default function Navbar(props: any) {
     setisClick(!isClick);
   };
 
-  const getLinks = () => {
+  const getLinks = (mobile: boolean) => {
     if (props.authenticated) {
       return (
-        <div className="ml-4 flex items-center space-x-4">
+        <div
+          className={
+            mobile ? "ml-4 flex flex-col" : "ml-4 flex flex-row space-x-8"
+          }
+        >
           <Link
             href="/admin/articles"
             className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
@@ -30,7 +34,7 @@ export default function Navbar(props: any) {
       );
     } else {
       return (
-        <div className="ml-4 flex items-center space-x-4">
+        <div className="ml-4 space-x-4">
           <Link
             href="/login"
             className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
@@ -43,20 +47,20 @@ export default function Navbar(props: any) {
   };
 
   return (
-    <nav className="bg-black pl-2 pr-2">
+    <nav className="bg-gray-700 pl-2 pr-2">
       <div className="max-w-7xl mx-auto px4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <Link
                 href="/"
-                className="text-white  text-2xl md:text-2xl lg:text-3xl"
+                className="text-white text-2xl md:text-2xl lg:text-3xl"
               >
                 amdevblog
               </Link>
             </div>
           </div>
-          <div className="hidden md:block">{getLinks()}</div>
+          <div className="hidden md:block">{getLinks(false)}</div>
           <div className="md:hidden flex  items-center">
             <button
               onClick={toogleNavbar}
@@ -97,7 +101,7 @@ export default function Navbar(props: any) {
           </div>
         </div>
       </div>
-      {isClick && <div className="md:hidden">{getLinks()}</div>}
+      {isClick && <div className="md:hidden">{getLinks(true)}</div>}
     </nav>
   );
 }

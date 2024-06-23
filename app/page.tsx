@@ -5,7 +5,13 @@ export default function Home() {
     <main>
       <Navbar />
       <div>
-        <h1 className="text-3xl font-bold underline">Blog Admin</h1>
+        <div className="pt-20">
+          <div className="pt-20">
+            <h1 className="text-center non-italic font-bold pt-20 text-3xl md:text-5xl lg:text-7xl">
+              Blog Admin
+            </h1>
+          </div>
+        </div>
       </div>
     </main>
   );

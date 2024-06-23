@@ -69,7 +69,9 @@ export default function Login() {
             </button>
           </div>
         </form>
-        <span>{message}</span>
+        <div className="text-center text-center text-white text-1xl md:text-1xl lg:text-2xl mt-10">
+          {message}
+        </div>
       </div>
     </main>
   );

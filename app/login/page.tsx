@@ -43,25 +43,35 @@ export default function Login() {
     <main>
       <Navbar />
       <div>
-        <h2>Login</h2>
+        <h2 className="text-center non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
+          Login
+        </h2>
         <form onSubmit={submit}>
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            onChange={handleInput}
-            placeholder="username"
-          />
-          <label>Password</label>
-          <input
-            type="text"
-            name="password"
-            onChange={handleInput}
-            placeholder="pass123"
-          />
-          <button type="submit" value="Submit">
-            Submit
-          </button>
+          <div className="flex flex-col items-center text-1xl md:text-1xl lg:text-2xl">
+            <label className="non-italic mt-10">Username</label>
+            <input
+              type="text"
+              name="username"
+              onChange={handleInput}
+              placeholder="username"
+              className="mt-5 p-2 border border-black"
+            />
+            <label className="non-italic mt-10">Password</label>
+            <input
+              type="text"
+              name="password"
+              onChange={handleInput}
+              placeholder="pass123"
+              className="mt-5 p-2 border border-black"
+            />
+            <button
+              type="submit"
+              value="Submit"
+              className="mt-10 p-2 border border-black"
+            >
+              Submit
+            </button>
+          </div>
         </form>
         <span>{message}</span>
       </div>

@@ -16,13 +16,13 @@ export default function Navbar(props: any) {
         <div className="ml-4 flex items-center space-x-4">
           <Link
             href="/admin/articles"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2"
+            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             Articles
           </Link>
           <Link
             href="/admin/articles/new"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2"
+            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             New article
           </Link>
@@ -33,7 +33,7 @@ export default function Navbar(props: any) {
         <div className="ml-4 flex items-center space-x-4">
           <Link
             href="/login"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2"
+            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             Login
           </Link>
@@ -48,7 +48,10 @@ export default function Navbar(props: any) {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-white">
+              <Link
+                href="/"
+                className="text-white  text-2xl md:text-2xl lg:text-3xl"
+              >
                 amdevblog
               </Link>
             </div>

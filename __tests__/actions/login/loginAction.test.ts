@@ -28,22 +28,22 @@ jest.mock("bcryptjs", () => ({
 import { loginAction } from "../../../app/actions/login/loginAction";
 
 describe("loginAction test", () => {
-  it("May return an object with a message property that contains the string 'Please provide username and password' in case of not receiving username", async () => {
+  it("May return an object with a message property that contains the string 'Provide username and password' in case of not receiving username", async () => {
     const response = await loginAction("", "x");
 
-    expect(response.message).toEqual("Please provide username and password");
+    expect(response.message).toEqual("Provide username and password");
   });
 
-  it("May return an object with a message property that contains the string 'Please provide username and password' in case of not receiving password", async () => {
+  it("May return an object with a message property that contains the string 'Provide username and password' in case of not receiving password", async () => {
     const response = await loginAction("x", "");
 
-    expect(response.message).toEqual("Please provide username and password");
+    expect(response.message).toEqual("Provide username and password");
   });
 
-  it("May return an object with a message property that contains the string 'Please provide username and password' in case of receiving no username and no password", async () => {
+  it("May return an object with a message property that contains the string 'Provide username and password' in case of receiving no username and no password", async () => {
     const response = await loginAction("", "");
 
-    expect(response.message).toEqual("Please provide username and password");
+    expect(response.message).toEqual("Provide username and password");
   });
 
   it("May return an object with a message property that contains the string 'Invalid credentials' in case of finding an existing user with that name in the database", async () => {

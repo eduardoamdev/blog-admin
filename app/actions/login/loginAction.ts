@@ -12,7 +12,7 @@ export async function loginAction(username: any, password: any) {
 
       return {
         success: false,
-        message: "Please provide username and password",
+        message: "Provide username and password",
       };
     }
 

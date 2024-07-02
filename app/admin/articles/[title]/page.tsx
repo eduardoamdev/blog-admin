@@ -42,17 +42,21 @@ export default async function Article({ params }: ArticleProps) {
   return (
     <main>
       <Navbar authenticated="true" />
-      <div>
-        <h2>Article</h2>
+      <div className="flex flex-col items-center">
         {info.success ? (
           <div>
-            <div>
-              <span>{info.article.title}</span>
-              <span>{info.article.content}</span>
-            </div>
+            <h3 className="text-white pt-20 font-bold text-2xl md:text-4xl lg:text-5xl">
+              {info.article.title}
+            </h3>
+            <textarea
+              value={info.article.content}
+              className="mt-5 p-2  text-1xl md:text-1xl lg:text-2xl"
+            />
           </div>
         ) : (
-          <span>{info.message}</span>
+          <span className="text-white pt-20 font-bold text-2xl md:text-4xl lg:text-5xl">
+            {info.message}
+          </span>
         )}
       </div>
     </main>

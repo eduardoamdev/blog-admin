@@ -46,7 +46,9 @@ export default async function Articles() {
             ))}
           </div>
         ) : (
-          <span>{info.message}</span>
+          <span className="text-white pt-20 font-bold text-2xl md:text-4xl lg:text-5xl">
+            {info.message}
+          </span>
         )}
       </div>
     </main>

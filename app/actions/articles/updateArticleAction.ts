@@ -5,7 +5,7 @@ import { connectToDB, dbClient } from "@/app/lib/database";
 
 export async function updateArticleAction(title: any, content: any) {
   try {
-    console.log(`Posting article with title ${title}`);
+    console.log(`Updating article with title ${title}`);
 
     await connectToDB();
 
@@ -20,7 +20,7 @@ export async function updateArticleAction(title: any, content: any) {
     return "Article has been updated successfully";
   } catch (error: any) {
     console.log(
-      `Error while posting article with title ${title}: ${error.message}`
+      `Error while updating article with title ${title}: ${error.message}`
     );
 
     return error.message;

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import Navbar from "@/app/components/Navbar";
 import { postArticleAction } from "@/app/actions/articles/postArticleAction";
 

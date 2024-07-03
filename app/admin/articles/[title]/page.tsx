@@ -1,6 +1,6 @@
 import { connectToDB, dbClient } from "@/app/lib/database";
 import Navbar from "../../../components/Navbar";
-import Link from "next/link";
+import ArticleActions from "@/app/components/ArticleActions";
 
 import { NextPageContext } from "next";
 
@@ -43,20 +43,7 @@ export default async function Article({ params }: ArticleProps) {
   return (
     <main>
       <Navbar authenticated="true" />
-      <nav className="flex flex-row-reverse bg-gray-400 p-1">
-        <Link
-          href="/admin/articles"
-          className="text-white hover:text-black text-1xl md:text-1xl lg:text-2xl mr-10"
-        >
-          Delete
-        </Link>
-        <Link
-          href="/admin/articles"
-          className="text-white hover:text-black text-1xl md:text-1xl lg:text-2xl mr-10"
-        >
-          Update
-        </Link>
-      </nav>
+      <ArticleActions title={params.title} />
       <div className="flex flex-col items-center">
         {info.success ? (
           <div>

@@ -15,6 +15,12 @@ export default function ArticleActions(props: any) {
       >
         Update
       </Link>
+      <Link
+        href={`/admin/articles/${props.title}`}
+        className="text-white hover:text-black text-1xl md:text-1xl lg:text-2xl mr-10"
+      >
+        Article
+      </Link>
     </nav>
   );
 }

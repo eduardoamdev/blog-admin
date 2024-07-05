@@ -13,7 +13,7 @@ export default function DeleteArticle({ params }: ArticleProps) {
       <ArticleActions title={params.title} />
       <div className="text-white mt-20 flex flex-col items-center">
         <div className="text-1xl md:text-1xl lg:text-2xl">Are you sure?</div>
-        <div className="mt-20">
+        <div className="mt-20 w-[60vw] md:w-[40vw] lg:w-[30vw] flex justify-between">
           <button className="bg-red-600 w-20 p-2 text-1xl md:text-1xl lg:text-2xl">
             Yes
           </button>

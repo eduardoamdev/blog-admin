@@ -12,8 +12,8 @@ describe("Home page test", () => {
   it("Renders with title and navigation links", () => {
     render(<Page />);
 
-    const homeText = screen.getByText("Welcome").textContent;
+    const homeText = screen.getByText("Welcome Admin").textContent;
 
-    expect(homeText).toBe("Welcome");
+    expect(homeText).toBe("Welcome Admin");
   });
 });

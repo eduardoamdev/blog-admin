@@ -34,6 +34,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
       setState({
         ...state,
         loading: false,
+        error: true,
         message: response,
       });
     }
@@ -99,6 +100,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
                 name="content"
                 value={state.content}
                 onChange={handleInput}
+                placeholder="content"
                 className="mt-5 p-2"
               />
               <button

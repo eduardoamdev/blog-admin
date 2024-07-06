@@ -19,7 +19,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
     message: "",
   });
 
-  const getArticle = async () => {
+  async function getArticle() {
     const response = await getArticleAction(params.title);
 
     if (response.title) {
@@ -36,7 +36,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
         message: response,
       });
     }
-  };
+  }
 
   const handleInput = (event: any) => {
     const fieldName = event.target.name;

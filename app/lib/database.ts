@@ -10,7 +10,7 @@ const dbConfig: ClientConfig = {
 
 export const dbClient: any = new Client(dbConfig);
 
-export const connectToDB = async () => {
+export async function connectToDB() {
   try {
     if (!dbClient._connected) {
       await dbClient.connect();
@@ -22,4 +22,4 @@ export const connectToDB = async () => {
       `There is the following database connection error: ${error.message}`
     );
   }
-};
+}

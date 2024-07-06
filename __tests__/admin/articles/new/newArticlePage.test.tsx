@@ -1,10 +1,3 @@
-// jest.mock("../../../../app/actions/articles/postArticleAction", () => ({
-//   postArticleAction: jest.fn(() => ({
-//     error: false,
-//     message: "Article successfully created",
-//   })),
-// }));
-
 jest.mock("../../../../app/actions/articles/postArticleAction", () => ({
   postArticleAction: jest
     .fn()

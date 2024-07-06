@@ -51,7 +51,7 @@ describe("Login page test", () => {
   });
 
   it("Handles successful form submission", async () => {
-    const { container } = render(<Page />);
+    render(<Page />);
 
     const submitButton = screen.getByRole("button");
 
@@ -59,13 +59,13 @@ describe("Login page test", () => {
       fireEvent.submit(submitButton);
     });
 
-    const spanText = container.querySelector("span")?.textContent;
+    const input: any = screen.getAllByPlaceholderText("username")[0];
 
-    expect(spanText).toBeFalsy();
+    expect(input.value).toBe("");
   });
 
   it("Handles non successful form submission", async () => {
-    const { container } = render(<Page />);
+    render(<Page />);
 
     const submitButton = screen.getByRole("button");
 
@@ -73,9 +73,8 @@ describe("Login page test", () => {
       fireEvent.submit(submitButton);
     });
 
-    const spanText = container.querySelector("span")?.textContent;
+    const errorText = screen.getByText("Test error").textContent;
 
-    expect(spanText).toBeTruthy();
-    expect(spanText).toBe("Test error");
+    expect(errorText).toBeTruthy();
   });
 });

@@ -4,10 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Navbar(props: any) {
-  const [isClick, setisClick] = useState(false);
+  const [isClick, setIsClick] = useState(false);
 
   const toogleNavbar = (): void => {
-    setisClick(!isClick);
+    setIsClick(!isClick);
   };
 
   const getLinks = (mobile: boolean) => {

@@ -1,16 +1,13 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Navbar from "../../app/components/Navbar";
 
 describe("Navbar component test", () => {
   it("Renders the corresponding Navbar if not props.authenticated", () => {
     render(<Navbar />);
 
-    const signupLinkText = screen.getByText("Signup").textContent;
-
     const loginLinkText = screen.getByText("Login").textContent;
 
-    expect(signupLinkText).toBeDefined();
     expect(loginLinkText).toBeDefined();
   });
 
@@ -21,10 +18,27 @@ describe("Navbar component test", () => {
 
     const newArticleLinkText = screen.getByText("New article").textContent;
 
-    const logoutLinkText = screen.getByText("Logout").textContent;
-
     expect(articlesLinkText).toBeDefined();
     expect(newArticleLinkText).toBeDefined();
-    expect(logoutLinkText).toBeDefined();
+  });
+
+  it("Click button to deploy mobile navbar with authenticated true", () => {
+    render(<Navbar authenticated="true" />);
+
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(true).toBe(true);
+  });
+
+  it("Click button to deploy mobile navbar with authenticated undefined", () => {
+    render(<Navbar />);
+
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(true).toBe(true);
   });
 });

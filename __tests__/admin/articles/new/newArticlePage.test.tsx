@@ -1,5 +1,21 @@
+// jest.mock("../../../../app/actions/articles/postArticleAction", () => ({
+//   postArticleAction: jest.fn(() => ({
+//     error: false,
+//     message: "Article successfully created",
+//   })),
+// }));
+
 jest.mock("../../../../app/actions/articles/postArticleAction", () => ({
-  postArticleAction: jest.fn(() => "Article successfully created"),
+  postArticleAction: jest
+    .fn()
+    .mockImplementationOnce(() => ({
+      error: false,
+      message: "Article successfully created",
+    }))
+    .mockImplementationOnce(() => ({
+      error: true,
+      message: "Test error",
+    })),
 }));
 
 jest.mock("../../../../app/components/Navbar", () => {
@@ -45,7 +61,7 @@ describe("New article page test", () => {
     expect(input.value).toBe("x");
   });
 
-  it("Handles form submit", async () => {
+  it("Handles form submit with successful response", async () => {
     render(<Page />);
 
     const submitButton = screen.getByRole("button");
@@ -57,6 +73,20 @@ describe("New article page test", () => {
     const successMessageElement = screen.getByText(
       "Article successfully created"
     );
+
+    expect(successMessageElement).toBeDefined();
+  });
+
+  it("Handles form submit with unsuccessful response", async () => {
+    render(<Page />);
+
+    const submitButton = screen.getByRole("button");
+
+    await act(async () => {
+      fireEvent.submit(submitButton);
+    });
+
+    const successMessageElement = screen.getByText("Test error");
 
     expect(successMessageElement).toBeDefined();
   });

@@ -5,30 +5,30 @@ import Navbar from "@/app/components/Navbar";
 import { postArticleAction } from "@/app/actions/articles/postArticleAction";
 
 export default function NewArticle() {
-  const [formData, setFormData] = useState({
+  const [state, setState] = useState({
     title: "",
     content: "",
+    error: false,
+    message: "",
   });
 
-  const [message, setMessage] = useState("");
-
-  const handleInput = (event: any) => {
+  function handleInput(event: any) {
     const fieldName = event.target.name;
 
     const fieldValue = event.target.value;
 
-    setFormData((prevState) => ({
+    setState((prevState) => ({
       ...prevState,
       [fieldName]: fieldValue,
     }));
-  };
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const message = await postArticleAction(formData.title, formData.content);
+    const response: any = await postArticleAction(state.title, state.content);
 
-    setMessage(message);
+    setState({ ...state, error: response.error, message: response.message });
   }
 
   return (
@@ -59,8 +59,14 @@ export default function NewArticle() {
             </button>
           </div>
         </form>
-        <div className="text-center text-center text-white text-1xl md:text-1xl lg:text-2xl mt-10">
-          {message}
+        <div
+          className={
+            !state.error
+              ? "text-white text-center text-1xl md:text-1xl lg:text-2xl mt-10"
+              : "text-red-600 text-center text-1xl md:text-1xl lg:text-2xl mt-10"
+          }
+        >
+          {state.message}
         </div>
       </div>
     </main>

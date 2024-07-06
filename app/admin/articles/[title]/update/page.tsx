@@ -16,6 +16,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
     title: "",
     content: "",
     loading: true,
+    error: false,
     message: "",
   });
 
@@ -38,7 +39,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
     }
   }
 
-  const handleInput = (event: any) => {
+  function handleInput(event: any) {
     const fieldName = event.target.name;
 
     const fieldValue = event.target.value;
@@ -47,16 +48,17 @@ export default function UpdateArticle({ params }: ArticleProps) {
       ...prevState,
       [fieldName]: fieldValue,
     }));
-  };
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const message = await updateArticleAction(state.title, state.content);
+    const response = await updateArticleAction(state.title, state.content);
 
     setState({
       ...state,
-      message: message,
+      message: response.message,
+      error: response.error,
     });
   }
 
@@ -108,7 +110,13 @@ export default function UpdateArticle({ params }: ArticleProps) {
               </button>
             </div>
           </form>
-          <div className="text-center text-center text-white text-1xl md:text-1xl lg:text-2xl mt-10">
+          <div
+            className={
+              !state.error
+                ? "text-white text-center text-1xl md:text-1xl lg:text-2xl mt-10"
+                : "text-red-600 text-center text-1xl md:text-1xl lg:text-2xl mt-10"
+            }
+          >
             {state.message}
           </div>
         </div>

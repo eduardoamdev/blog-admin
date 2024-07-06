@@ -69,7 +69,7 @@ export default function Login() {
             </button>
           </div>
         </form>
-        <div className="text-center text-center text-white text-1xl md:text-1xl lg:text-2xl mt-10">
+        <div className="text-center text-red-600 text-1xl md:text-1xl lg:text-2xl mt-10">
           {message}
         </div>
       </div>

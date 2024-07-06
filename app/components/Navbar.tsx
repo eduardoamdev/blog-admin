@@ -20,13 +20,13 @@ export default function Navbar(props: any) {
         >
           <Link
             href="/admin/articles"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
+            className="text-white ¡lg:hover:bg-white lg:hover:text-black lg:rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             Articles
           </Link>
           <Link
             href="/admin/articles/new"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
+            className="text-white lg:hover:bg-white lg:hover:text-black lg:rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             New article
           </Link>
@@ -34,10 +34,14 @@ export default function Navbar(props: any) {
       );
     } else {
       return (
-        <div className="ml-4 space-x-4">
+        <div
+          className={
+            mobile ? "ml-4 flex flex-col" : "ml-4 flex flex-row space-x-8"
+          }
+        >
           <Link
             href="/login"
-            className="text-white hover:bg-white hover:text-black rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
+            className="text-white lg:hover:bg-white lg:hover:text-black lg:rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
             Login
           </Link>

@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
 
 export async function deleteArticleAction(title: any) {
@@ -11,6 +12,8 @@ export async function deleteArticleAction(title: any) {
     await dbClient.query(
       `delete from admin.articles a where a.title = '${title}'`
     );
+
+    revalidateTag("/admin/articles");
 
     console.log("Article has been fetched successfully");
   } catch (error: any) {

@@ -90,6 +90,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
                 onChange={handleInput}
                 placeholder="title"
                 className="mt-5 p-2"
+                readOnly
               />
               <label className="non-italic text-white mt-10">Content</label>
               <textarea

@@ -39,6 +39,12 @@ jest.mock("../../../../app/lib/database", () => {
   return { connectToDB, dbClient };
 });
 
+jest.mock("../../../../app/components/ArticleActions", () => {
+  const ArticleActions = () => <div />;
+
+  return ArticleActions;
+});
+
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import Page from "../../../../app/admin/articles/[title]/page";

@@ -13,14 +13,14 @@ jest.mock("../../../app/lib/database", () => ({
 import { getArticleAction } from "../../../app/actions/articles/getArticleAction";
 
 describe("getArticleAction test", () => {
-  it("Article obtained correctly", async () => {
+  it("Article correctly obtained", async () => {
     const response = await getArticleAction("x");
 
     expect(response.title).toEqual("x");
     expect(response.content).toEqual("x");
   });
 
-  it("Article not obtained correctly", async () => {
+  it("Article not correctly obtained ", async () => {
     const response = await getArticleAction("x");
 
     expect(response).toEqual("Article not found");

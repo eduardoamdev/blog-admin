@@ -9,7 +9,7 @@ jest.mock("next/cache");
 
 import { updateArticleAction } from "../../../app/actions/articles/updateArticleAction";
 
-describe("updateArticleAction test", () => {
+describe("Update article action test", () => {
   it("Article correctly update", async () => {
     const response = await updateArticleAction("x", "xx");
 

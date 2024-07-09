@@ -16,7 +16,7 @@ jest.mock("next/cache");
 
 import { deleteArticleAction } from "../../../app/actions/articles/deleteArticleAction";
 
-describe("deleteArticleAction test", () => {
+describe("Delete article action test", () => {
   it("Article correctly delete", async () => {
     const response = await deleteArticleAction("x");
 

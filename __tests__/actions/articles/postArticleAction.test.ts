@@ -17,7 +17,7 @@ jest.mock("../../../app/lib/database", () => ({
 
 import { postArticleAction } from "../../../app/actions/articles/postArticleAction";
 
-describe("postArticleAction test", () => {
+describe("Post article action test", () => {
   it("May return a string 'An article with this title already exists' in case of finding an existing user with that name in the database", async () => {
     const response = await postArticleAction("x", "x");
 

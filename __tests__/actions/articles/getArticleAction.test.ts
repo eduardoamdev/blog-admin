@@ -12,7 +12,7 @@ jest.mock("../../../app/lib/database", () => ({
 
 import { getArticleAction } from "../../../app/actions/articles/getArticleAction";
 
-describe("getArticleAction test", () => {
+describe("Get articleAction test", () => {
   it("Article correctly obtained", async () => {
     const response = await getArticleAction("x");
 

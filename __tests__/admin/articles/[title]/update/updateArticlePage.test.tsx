@@ -149,9 +149,9 @@ describe("Update article page test", () => {
         fireEvent.submit(submitButton);
       });
 
-      const successMessageElement = screen.getByText("Test error");
+      const errorMessageElement = screen.getByText("Test error");
 
-      expect(successMessageElement).toBeDefined();
+      expect(errorMessageElement).toBeDefined();
     });
   });
 });

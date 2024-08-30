@@ -7,28 +7,14 @@ import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { loginAction } from "@/app/actions/login/loginAction";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
   const [message, setMessage] = useState("");
 
-  const handleInput = (event: any) => {
-    const fieldName = event.target.name;
+  async function submitUserAction(formData: FormData) {
+    const username = formData.get("username");
 
-    const fieldValue = event.target.value;
+    const password = formData.get("password");
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldValue,
-    }));
-  };
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const response = await loginAction(formData.username, formData.password);
+    const response = await loginAction(username, password);
 
     if (!response.success) {
       setMessage(response.message);
@@ -46,13 +32,12 @@ export default function Login() {
         <h2 className="text-center text-white non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
           Login
         </h2>
-        <form onSubmit={submit}>
+        <form action={submitUserAction}>
           <div className="flex flex-col items-center text-1xl md:text-1xl lg:text-2xl">
             <label className="non-italic text-white mt-10">Username</label>
             <input
               type="text"
               name="username"
-              onChange={handleInput}
               placeholder="username"
               className="mt-5 p-2"
             />
@@ -60,7 +45,6 @@ export default function Login() {
             <input
               type="text"
               name="password"
-              onChange={handleInput}
               placeholder="pass123"
               className="mt-5 p-2"
             />

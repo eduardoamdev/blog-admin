@@ -1,27 +1,34 @@
 "use server";
 
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { Article } from "@/app/interfaces";
 
-export async function getArticleAction(title: any) {
+export async function getArticleAction(title: string | string[] | undefined) {
   try {
     console.log(`Getting article`);
 
     connectToDB();
 
-    const articles = await dbClient.query(
-      `select * from admin.articles a where a.title = '${title}'`
-    );
+    const articles: Article[] = (
+      await dbClient.query(
+        `select * from admin.articles a where a.title = '${title}'`
+      )
+    ).rows;
 
-    if (!articles.rows.length) throw new Error("Article not found");
+    if (!articles) throw new Error("Article not found");
 
     console.log("Article has been fetched successfully");
 
-    return articles.rows[0];
+    return {
+      articles,
+      error: false,
+      message: "Article has been fetched successfully",
+    };
   } catch (error: any) {
     console.log(
       `Error while getting article with title ${title}: ${error.message}`
     );
 
-    return error.message;
+    return { articles: [], error: true, message: error.message };
   }
 }

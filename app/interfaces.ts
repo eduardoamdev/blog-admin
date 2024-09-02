@@ -1,6 +1,7 @@
 import { NextPageContext } from "next";
 
 export interface ActionResponse {
+  articles: Article[];
   error: boolean;
   message: string;
 }
@@ -10,10 +11,14 @@ export interface Article {
   content: string;
 }
 
-export interface Articles {
-  rows: Article[];
-}
-
 export interface ArticleProps {
   params: NextPageContext["query"];
+}
+
+export interface UpdateArticlesState {
+  title: string;
+  content: string;
+  loading: boolean;
+  error: boolean;
+  message: string;
 }

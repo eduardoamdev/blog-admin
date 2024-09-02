@@ -5,11 +5,15 @@ import { getArticleAction } from "@/app/actions/articles/getArticleAction";
 import { updateArticleAction } from "@/app/actions/articles/updateArticleAction";
 import Navbar from "../../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
-import { ArticleProps, ActionResponse } from "@/app/interfaces";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
+import {
+  ArticleProps,
+  ActionResponse,
+  UpdateArticlesState,
+} from "@/app/interfaces";
 
-export default function UpdateArticle({ params }: ArticleProps) {
-  const [state, setState] = useState({
+export default function UpdateArticle({ params }: ArticleProps): JSX.Element {
+  const [state, setState] = useState<UpdateArticlesState>({
     title: "",
     content: "",
     loading: true,
@@ -18,13 +22,13 @@ export default function UpdateArticle({ params }: ArticleProps) {
   });
 
   async function getArticle(): Promise<void> {
-    const response = await getArticleAction(params.title);
+    const response: ActionResponse = await getArticleAction(params.title);
 
-    if (response.title) {
+    if (!response.error) {
       setState({
         ...state,
-        title: response.title,
-        content: response.content,
+        title: response.articles[0].title,
+        content: response.articles[0].content,
         loading: false,
       });
     } else {
@@ -32,7 +36,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
         ...state,
         loading: false,
         error: true,
-        message: response,
+        message: response.message,
       });
     }
   }

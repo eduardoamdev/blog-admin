@@ -22,12 +22,12 @@ export async function deleteArticleAction(
 
     console.log(message);
 
-    return { error: false, message };
+    return { articles: [], error: false, message };
   } catch (error: Error | any) {
     console.log(
       `Error while getting article with title ${title}: ${error.message}`
     );
 
-    return { error: true, message: error.message };
+    return { articles: [], error: true, message: error.message };
   }
 }

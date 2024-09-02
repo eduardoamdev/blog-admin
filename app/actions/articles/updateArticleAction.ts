@@ -23,12 +23,16 @@ export async function updateArticleAction(
 
     console.log(`Article with title ${title} has been updated successfully`);
 
-    return { error: false, message: "Article has been updated successfully" };
+    return {
+      articles: [],
+      error: false,
+      message: "Article has been updated successfully",
+    };
   } catch (error: Error | any) {
     console.log(
       `Error while updating article with title ${title}: ${error.message}`
     );
 
-    return { error: true, message: error.message };
+    return { articles: [], error: true, message: error.message };
   }
 }

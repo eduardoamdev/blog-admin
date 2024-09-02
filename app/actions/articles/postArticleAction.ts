@@ -2,8 +2,12 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { ActionResponse, Articles } from "@/app/interfaces";
 
-export async function postArticleAction(title: any, content: any) {
+export async function postArticleAction(
+  title: FormDataEntryValue | null,
+  content: FormDataEntryValue | null
+): Promise<ActionResponse> {
   try {
     if (!title || !content) throw new Error("Title and content are required");
 
@@ -11,14 +15,14 @@ export async function postArticleAction(title: any, content: any) {
 
     await connectToDB();
 
-    const existingArticle = await dbClient.query(
+    const existingArticle: Articles = await dbClient.query(
       `select * from admin.articles where title = '${title}'`
     );
 
     if (existingArticle.rows.length > 0) {
-      console.log(`An a rticle with title ${title} already exists`);
+      const message: string = `An article with title ${title} already exists`;
 
-      throw new Error("An article with this title already exists");
+      throw new Error(message);
     }
 
     await dbClient.query(
@@ -27,10 +31,12 @@ export async function postArticleAction(title: any, content: any) {
 
     revalidateTag("/admin/articles");
 
-    console.log(`Article with title ${title} has been posted successfully`);
+    const message: string = `Article with title ${title} has been posted successfully`;
 
-    return { error: false, message: "Article has been posted successfully" };
-  } catch (error: any) {
+    console.log(message);
+
+    return { error: false, message };
+  } catch (error: Error | any) {
     console.log(
       `Error while posting article with title ${title}: ${error.message}`
     );

@@ -1,34 +1,28 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import Navbar from "@/app/components/Navbar";
+import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { postArticleAction } from "@/app/actions/articles/postArticleAction";
+import { ActionResponse } from "@/app/interfaces";
 
-export default function NewArticle() {
-  const [state, setState] = useState({
-    title: "",
-    content: "",
-    error: false,
-    message: "",
-  });
+export default function NewArticle(): JSX.Element {
+  const [message, setMessage] = useState<string>("");
 
-  function handleInput(event: any) {
-    const fieldName = event.target.name;
+  async function submitArticleAction(formData: FormData): Promise<void> {
+    const title: FormDataEntryValue | null = formData.get("title");
 
-    const fieldValue = event.target.value;
+    const content: FormDataEntryValue | null = formData.get("content");
 
-    setState((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldValue,
-    }));
-  }
+    const response: ActionResponse = await postArticleAction(title, content);
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    if (response.error) {
+      setMessage(response.message);
 
-    const response: any = await postArticleAction(state.title, state.content);
+      return;
+    }
 
-    setState({ ...state, error: response.error, message: response.message });
+    navigateAction("/admin/articles");
   }
 
   return (
@@ -38,22 +32,17 @@ export default function NewArticle() {
         <h2 className="text-center text-white non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
           New article
         </h2>
-        <form onSubmit={submit}>
+        <form action={submitArticleAction}>
           <div className="flex flex-col items-center text-1xl md:text-1xl lg:text-2xl">
             <label className="non-italic text-white mt-10">Title</label>
             <input
               type="text"
               name="title"
-              onChange={handleInput}
               placeholder="title"
               className="mt-5 p-2"
             />
             <label className="non-italic text-white mt-10">Content</label>
-            <textarea
-              name="content"
-              onChange={handleInput}
-              className="mt-5 p-2"
-            />
+            <textarea name="content" className="mt-5 p-2" />
             <button type="submit" value="Submit" className="mt-10 p-2 bg-white">
               Submit
             </button>
@@ -61,12 +50,12 @@ export default function NewArticle() {
         </form>
         <div
           className={
-            !state.error
+            !message.includes("Error")
               ? "text-white text-center text-1xl md:text-1xl lg:text-2xl mt-10"
               : "text-red-600 text-center text-1xl md:text-1xl lg:text-2xl mt-10"
           }
         >
-          {state.message}
+          {message}
         </div>
       </div>
     </main>

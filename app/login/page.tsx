@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { FormEvent } from "react";
 import Navbar from "@/app/components/Navbar";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { loginAction } from "@/app/actions/login/loginAction";
 
-export default function Login() {
+export default function Login(): JSX.Element {
   const [message, setMessage] = useState("");
 
   async function submitUserAction(formData: FormData) {

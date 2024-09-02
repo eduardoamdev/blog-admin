@@ -2,7 +2,7 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
-import { ActionResponse, Articles } from "@/app/interfaces";
+import { ActionResponse, Article } from "@/app/interfaces";
 
 export async function postArticleAction(
   title: FormDataEntryValue | null,
@@ -15,11 +15,13 @@ export async function postArticleAction(
 
     await connectToDB();
 
-    const existingArticle: Articles = await dbClient.query(
-      `select * from admin.articles where title = '${title}'`
-    );
+    const existingArticles: Article[] = (
+      await dbClient.query(
+        `select * from admin.articles where title = '${title}'`
+      )
+    ).rows;
 
-    if (existingArticle.rows.length > 0) {
+    if (existingArticles.length > 0) {
       const message: string = `An article with title ${title} already exists`;
 
       throw new Error(message);
@@ -35,12 +37,12 @@ export async function postArticleAction(
 
     console.log(message);
 
-    return { error: false, message };
+    return { articles: [], error: false, message };
   } catch (error: Error | any) {
     console.log(
       `Error while posting article with title ${title}: ${error.message}`
     );
 
-    return { error: true, message: error.message };
+    return { articles: [], error: true, message: error.message };
   }
 }

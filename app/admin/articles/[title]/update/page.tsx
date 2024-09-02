@@ -1,15 +1,12 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { getArticleAction } from "@/app/actions/articles/getArticleAction";
 import { updateArticleAction } from "@/app/actions/articles/updateArticleAction";
 import Navbar from "../../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
-import { NextPageContext } from "next";
-
-interface ArticleProps {
-  params: NextPageContext["query"];
-}
+import { ArticleProps, ActionResponse } from "@/app/interfaces";
+import { navigateAction } from "@/app/actions/navigation/navigateAction";
 
 export default function UpdateArticle({ params }: ArticleProps) {
   const [state, setState] = useState({
@@ -20,7 +17,7 @@ export default function UpdateArticle({ params }: ArticleProps) {
     message: "",
   });
 
-  async function getArticle() {
+  async function getArticle(): Promise<void> {
     const response = await getArticleAction(params.title);
 
     if (response.title) {
@@ -40,27 +37,24 @@ export default function UpdateArticle({ params }: ArticleProps) {
     }
   }
 
-  function handleInput(event: any) {
-    const fieldName = event.target.name;
+  async function submitArticleAction(formData: FormData): Promise<void> {
+    const title: FormDataEntryValue | null = formData.get("title");
 
-    const fieldValue = event.target.value;
+    const content: FormDataEntryValue | null = formData.get("content");
 
-    setState((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldValue,
-    }));
-  }
+    const response: ActionResponse = await updateArticleAction(title, content);
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    if (response.error) {
+      setState({
+        ...state,
+        message: response.message,
+        error: response.error,
+      });
 
-    const response = await updateArticleAction(state.title, state.content);
+      return;
+    }
 
-    setState({
-      ...state,
-      message: response.message,
-      error: response.error,
-    });
+    navigateAction(`/admin/articles/${title}`);
   }
 
   useEffect(() => {
@@ -73,24 +67,23 @@ export default function UpdateArticle({ params }: ArticleProps) {
       <Navbar authenticated="true" />
       <ArticleActions title={params.title} />
       {state.loading ? (
-        <div>
-          <span className="text-white pt-20 font-bold text-1xl md:text-3xl lg:text-4xl">
+        <div className="pt-20">
+          <h3 className="text-center pt-20 text-white pt-20 font-bold text-1xl md:text-3xl lg:text-4xl">
             Loading...
-          </span>
+          </h3>
         </div>
       ) : (
         <div>
           <h2 className="text-center text-white non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
             Update article
           </h2>
-          <form onSubmit={submit}>
+          <form action={submitArticleAction}>
             <div className="flex flex-col items-center text-1xl md:text-1xl lg:text-2xl">
               <label className="non-italic text-white mt-10">Title</label>
               <input
                 type="text"
                 name="title"
                 value={state.title}
-                onChange={handleInput}
                 placeholder="title"
                 className="mt-5 p-2"
                 readOnly
@@ -98,11 +91,11 @@ export default function UpdateArticle({ params }: ArticleProps) {
               <label className="non-italic text-white mt-10">Content</label>
               <textarea
                 name="content"
-                value={state.content}
-                onChange={handleInput}
                 placeholder="content"
                 className="mt-5 p-2"
-              />
+              >
+                {state.content}
+              </textarea>
               <button
                 type="submit"
                 value="Submit"

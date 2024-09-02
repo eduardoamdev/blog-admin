@@ -2,10 +2,11 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { ActionResponse } from "@/app/interfaces";
 
 export async function deleteArticleAction(
   title: string | string[] | undefined
-): Promise<string> {
+): Promise<ActionResponse> {
   try {
     console.log(`Deleting article`);
 
@@ -21,12 +22,12 @@ export async function deleteArticleAction(
 
     console.log(message);
 
-    return message;
+    return { error: false, message };
   } catch (error: Error | any) {
     console.log(
       `Error while getting article with title ${title}: ${error.message}`
     );
 
-    return error.message;
+    return { error: true, message: error.message };
   }
 }

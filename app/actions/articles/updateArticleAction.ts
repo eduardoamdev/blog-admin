@@ -2,8 +2,12 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { ActionResponse } from "@/app/interfaces";
 
-export async function updateArticleAction(title: any, content: any) {
+export async function updateArticleAction(
+  title: FormDataEntryValue | null,
+  content: FormDataEntryValue | null
+): Promise<ActionResponse> {
   try {
     if (!content) throw new Error("Content is required");
 
@@ -20,7 +24,7 @@ export async function updateArticleAction(title: any, content: any) {
     console.log(`Article with title ${title} has been updated successfully`);
 
     return { error: false, message: "Article has been updated successfully" };
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.log(
       `Error while updating article with title ${title}: ${error.message}`
     );

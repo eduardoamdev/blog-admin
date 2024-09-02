@@ -1,3 +1,5 @@
+import { NextPageContext } from "next";
+
 export interface ActionResponse {
   error: boolean;
   message: string;
@@ -10,4 +12,8 @@ export interface Article {
 
 export interface Articles {
   rows: Article[];
+}
+
+export interface ArticleProps {
+  params: NextPageContext["query"];
 }

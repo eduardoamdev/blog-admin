@@ -3,22 +3,18 @@
 import { useState } from "react";
 import Navbar from "../../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
-import { NextPageContext } from "next";
 import { deleteArticleAction } from "@/app/actions/articles/deleteArticleAction";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
-
-interface ArticleProps {
-  params: NextPageContext["query"];
-}
+import { ArticleProps, ActionResponse } from "@/app/interfaces";
 
 export default function DeleteArticle({ params }: ArticleProps): JSX.Element {
   const [message, setMessage] = useState<string>("");
 
   async function deleteArticle(): Promise<void> {
-    const message: string = await deleteArticleAction(params.title);
+    const response: ActionResponse = await deleteArticleAction(params.title);
 
-    if (message.includes("Error")) {
-      setMessage(message);
+    if (response.error) {
+      setMessage(response.message);
     } else {
       navigateAction("/admin/articles");
     }

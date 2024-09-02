@@ -26,7 +26,7 @@ export async function getArticleAction(
       error: false,
       message: "Article has been fetched successfully",
     };
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.log(
       `Error while getting article with title ${title}: ${error.message}`
     );

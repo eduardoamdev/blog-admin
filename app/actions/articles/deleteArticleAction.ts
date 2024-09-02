@@ -3,7 +3,9 @@
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
 
-export async function deleteArticleAction(title: any) {
+export async function deleteArticleAction(
+  title: string | string[] | undefined
+): Promise<string> {
   try {
     console.log(`Deleting article`);
 
@@ -15,8 +17,12 @@ export async function deleteArticleAction(title: any) {
 
     revalidateTag("/admin/articles");
 
-    console.log("Article has been fetched successfully");
-  } catch (error: any) {
+    const message = "Article has been fetched successfully";
+
+    console.log(message);
+
+    return message;
+  } catch (error: Error | any) {
     console.log(
       `Error while getting article with title ${title}: ${error.message}`
     );

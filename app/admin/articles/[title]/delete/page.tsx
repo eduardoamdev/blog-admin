@@ -12,12 +12,12 @@ interface ArticleProps {
 }
 
 export default function DeleteArticle({ params }: ArticleProps) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string>("");
 
-  async function deleteArticle() {
-    const message = await deleteArticleAction(params.title);
+  async function deleteArticle(): Promise<void> {
+    const message: string = await deleteArticleAction(params.title);
 
-    if (message) {
+    if (message.includes("Error")) {
       setMessage(message);
     } else {
       navigateAction("/admin/articles");

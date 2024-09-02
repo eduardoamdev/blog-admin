@@ -11,7 +11,7 @@ interface ArticleProps {
   params: NextPageContext["query"];
 }
 
-export default function DeleteArticle({ params }: ArticleProps) {
+export default function DeleteArticle({ params }: ArticleProps): JSX.Element {
   const [message, setMessage] = useState<string>("");
 
   async function deleteArticle(): Promise<void> {

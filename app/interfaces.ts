@@ -15,6 +15,12 @@ export interface ArticleProps {
   params: NextPageContext["query"];
 }
 
+export interface ArticleInfo {
+  success: boolean;
+  article: Article;
+  message: string;
+}
+
 export interface UpdateArticlesState {
   title: string;
   content: string;

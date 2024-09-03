@@ -1,15 +1,13 @@
 import { connectToDB, dbClient } from "@/app/lib/database";
 import Navbar from "../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
+import { getArticleAction } from "@/app/actions/articles/getArticleAction";
+import { ArticleProps, ActionResponse, ArticleInfo } from "@/app/interfaces";
 
-import { NextPageContext } from "next";
-
-interface ArticleProps {
-  params: NextPageContext["query"];
-}
-
-export default async function Article({ params }: ArticleProps) {
-  let info = {
+export default async function Article({
+  params,
+}: ArticleProps): Promise<JSX.Element> {
+  let info: ArticleInfo = {
     success: false,
     article: {
       title: "",
@@ -25,16 +23,12 @@ export default async function Article({ params }: ArticleProps) {
 
     connectToDB();
 
-    const articles = await dbClient.query(
-      `select * from admin.articles a where a.title = '${params.title}'`
-    );
-
-    if (!articles.rows.length) throw new Error("Article not found");
+    const response: ActionResponse = await getArticleAction(params.title);
 
     console.log("Article has been fetched successfully");
 
-    info = { ...info, success: true, article: articles.rows[0] };
-  } catch (error: any) {
+    info = { ...info, success: true, article: response.articles[0] };
+  } catch (error: Error | any) {
     console.log(`Error while getting article: ${error.message}`);
 
     info = { ...info, success: false, message: error.message };

@@ -2,12 +2,12 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
-import { ActionResponse } from "@/app/interfaces";
+import { ArticlesActionResponse } from "@/app/interfaces";
 
 export async function updateArticleAction(
   title: FormDataEntryValue | null,
   content: FormDataEntryValue | null
-): Promise<ActionResponse> {
+): Promise<ArticlesActionResponse> {
   try {
     if (!content) throw new Error("Content is required");
 

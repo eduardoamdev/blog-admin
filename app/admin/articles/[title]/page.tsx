@@ -2,7 +2,11 @@ import { connectToDB } from "@/app/lib/database";
 import Navbar from "../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
 import { getArticleAction } from "@/app/actions/articles/getArticleAction";
-import { ArticleProps, ActionResponse, ArticleInfo } from "@/app/interfaces";
+import {
+  ArticleProps,
+  ArticlesActionResponse,
+  ArticleInfo,
+} from "@/app/interfaces";
 
 export default async function Article({
   params,
@@ -20,7 +24,7 @@ export default async function Article({
 
   connectToDB();
 
-  const response: ActionResponse = await getArticleAction(params.title);
+  const response: ArticlesActionResponse = await getArticleAction(params.title);
 
   if (!response.error) {
     console.log("Article has been fetched successfully");

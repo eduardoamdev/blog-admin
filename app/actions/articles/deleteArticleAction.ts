@@ -2,11 +2,11 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
-import { ActionResponse } from "@/app/interfaces";
+import { ArticlesActionResponse } from "@/app/interfaces";
 
 export async function deleteArticleAction(
   title: string | string[] | undefined
-): Promise<ActionResponse> {
+): Promise<ArticlesActionResponse> {
   try {
     console.log(`Deleting article`);
 

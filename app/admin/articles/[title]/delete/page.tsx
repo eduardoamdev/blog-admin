@@ -5,13 +5,15 @@ import Navbar from "../../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
 import { deleteArticleAction } from "@/app/actions/articles/deleteArticleAction";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
-import { ArticleProps, ActionResponse } from "@/app/interfaces";
+import { ArticleProps, ArticlesActionResponse } from "@/app/interfaces";
 
 export default function DeleteArticle({ params }: ArticleProps): JSX.Element {
   const [message, setMessage] = useState<string>("");
 
   async function deleteArticle(): Promise<void> {
-    const response: ActionResponse = await deleteArticleAction(params.title);
+    const response: ArticlesActionResponse = await deleteArticleAction(
+      params.title
+    );
 
     if (response.error) {
       setMessage(response.message);

@@ -1,9 +1,9 @@
 "use server";
 
 import { connectToDB, dbClient } from "@/app/lib/database";
-import { Article, ActionResponse } from "@/app/interfaces";
+import { Article, ArticlesActionResponse } from "@/app/interfaces";
 
-export async function getArticlesAction(): Promise<ActionResponse> {
+export async function getArticlesAction(): Promise<ArticlesActionResponse> {
   try {
     console.log(`Getting articles`);
 

@@ -1,6 +1,6 @@
 import { NextPageContext } from "next";
 
-export interface ActionResponse {
+export interface ArticlesActionResponse {
   articles: Article[];
   error: boolean;
   message: string;

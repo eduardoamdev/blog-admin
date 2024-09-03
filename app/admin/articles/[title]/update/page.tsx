@@ -8,7 +8,7 @@ import ArticleActions from "@/app/components/ArticleActions";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import {
   ArticleProps,
-  ActionResponse,
+  ArticlesActionResponse,
   UpdateArticlesState,
 } from "@/app/interfaces";
 
@@ -22,7 +22,9 @@ export default function UpdateArticle({ params }: ArticleProps): JSX.Element {
   });
 
   async function getArticle(): Promise<void> {
-    const response: ActionResponse = await getArticleAction(params.title);
+    const response: ArticlesActionResponse = await getArticleAction(
+      params.title
+    );
 
     if (!response.error) {
       setState({
@@ -46,7 +48,10 @@ export default function UpdateArticle({ params }: ArticleProps): JSX.Element {
 
     const content: FormDataEntryValue | null = formData.get("content");
 
-    const response: ActionResponse = await updateArticleAction(title, content);
+    const response: ArticlesActionResponse = await updateArticleAction(
+      title,
+      content
+    );
 
     if (response.error) {
       setState({

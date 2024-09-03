@@ -1,6 +1,6 @@
 import { connectToDB } from "@/app/lib/database";
 import Navbar from "../../components/Navbar";
-import { ActionResponse, ArticlesInfo } from "@/app/interfaces";
+import { ArticlesActionResponse, ArticlesInfo } from "@/app/interfaces";
 import { getArticlesAction } from "@/app/actions/articles/getArticlesAction";
 
 export default async function Articles(): Promise<JSX.Element> {
@@ -14,7 +14,7 @@ export default async function Articles(): Promise<JSX.Element> {
 
   connectToDB();
 
-  const response: ActionResponse = await getArticlesAction();
+  const response: ArticlesActionResponse = await getArticlesAction();
 
   if (!response.error) {
     console.log("Articles have been fetched successfully");

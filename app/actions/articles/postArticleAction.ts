@@ -2,12 +2,12 @@
 
 import { revalidateTag } from "next/cache";
 import { connectToDB, dbClient } from "@/app/lib/database";
-import { ActionResponse, Article } from "@/app/interfaces";
+import { ArticlesActionResponse, Article } from "@/app/interfaces";
 
 export async function postArticleAction(
   title: FormDataEntryValue | null,
   content: FormDataEntryValue | null
-): Promise<ActionResponse> {
+): Promise<ArticlesActionResponse> {
   try {
     if (!title || !content) throw new Error("Title and content are required");
 

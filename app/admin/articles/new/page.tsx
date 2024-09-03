@@ -4,7 +4,7 @@ import { useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { postArticleAction } from "@/app/actions/articles/postArticleAction";
-import { ActionResponse } from "@/app/interfaces";
+import { ArticlesActionResponse } from "@/app/interfaces";
 
 export default function NewArticle(): JSX.Element {
   const [message, setMessage] = useState<string>("");
@@ -14,7 +14,10 @@ export default function NewArticle(): JSX.Element {
 
     const content: FormDataEntryValue | null = formData.get("content");
 
-    const response: ActionResponse = await postArticleAction(title, content);
+    const response: ArticlesActionResponse = await postArticleAction(
+      title,
+      content
+    );
 
     if (response.error) {
       setMessage(response.message);

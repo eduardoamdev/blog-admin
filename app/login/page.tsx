@@ -4,16 +4,17 @@ import { useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import { navigateAction } from "@/app/actions/navigation/navigateAction";
 import { loginAction } from "@/app/actions/login/loginAction";
+import { LoginActionResponse } from "../interfaces";
 
 export default function Login(): JSX.Element {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState<string>("");
 
-  async function submitUserAction(formData: FormData) {
-    const username = formData.get("username");
+  async function submitUserAction(formData: FormData): Promise<void> {
+    const username: FormDataEntryValue | null = formData.get("username");
 
-    const password = formData.get("password");
+    const password: FormDataEntryValue | null = formData.get("password");
 
-    const response = await loginAction(username, password);
+    const response: LoginActionResponse = await loginAction(username, password);
 
     if (!response.success) {
       setMessage(response.message);
@@ -26,7 +27,7 @@ export default function Login(): JSX.Element {
 
   return (
     <main>
-      <Navbar />
+      <Navbar authenticated="false" />
       <div>
         <h2 className="text-center text-white non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
           Login

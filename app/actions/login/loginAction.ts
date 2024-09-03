@@ -2,8 +2,12 @@
 
 import bcrypt from "bcryptjs";
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { User } from "@/app/interfaces";
 
-export async function loginAction(username: any, password: any) {
+export async function loginAction(
+  username: FormDataEntryValue | null,
+  password: FormDataEntryValue | null
+) {
   try {
     console.log(`Logging user ${username}`);
 
@@ -18,13 +22,15 @@ export async function loginAction(username: any, password: any) {
 
     await connectToDB();
 
-    const existentUser = await dbClient.query(
-      `select * from admin.users where username = '${username}'`
-    );
+    const existentUser: User = (
+      await dbClient.query(
+        `select * from admin.users where username = '${username}'`
+      )
+    ).rows[0];
 
     const invalidCredentialsMessage = "Invalid credentials";
 
-    if (!existentUser.rows.length) {
+    if (!existentUser) {
       console.log(`User ${username} does not exist in the database`);
 
       return {
@@ -33,11 +39,9 @@ export async function loginAction(username: any, password: any) {
       };
     }
 
-    const userInfo = existentUser.rows[0];
-
     const passwordIsCorrect: boolean = await bcrypt.compare(
-      password,
-      userInfo.password
+      password.toString(),
+      existentUser.password
     );
 
     if (!passwordIsCorrect) {
@@ -53,8 +57,9 @@ export async function loginAction(username: any, password: any) {
 
     return {
       success: true,
+      message: "Successful login",
     };
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.log(
       `Error while logging in user with username ${username}: ${error.message}`
     );

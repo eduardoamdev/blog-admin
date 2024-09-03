@@ -5,6 +5,11 @@ export interface User {
   password: string;
 }
 
+export interface LoginActionResponse {
+  success: boolean;
+  message: string;
+}
+
 export interface ArticlesActionResponse {
   articles: Article[];
   error: boolean;

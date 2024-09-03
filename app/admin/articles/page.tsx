@@ -1,10 +1,10 @@
-import { connectToDB, dbClient } from "@/app/lib/database";
+import { connectToDB } from "@/app/lib/database";
 import Navbar from "../../components/Navbar";
-import { ActionResponse } from "@/app/interfaces";
+import { ActionResponse, ArticlesInfo } from "@/app/interfaces";
 import { getArticlesAction } from "@/app/actions/articles/getArticlesAction";
 
 export default async function Articles() {
-  let info = {
+  let info: ArticlesInfo = {
     success: false,
     articles: [] as any[],
     message: "",

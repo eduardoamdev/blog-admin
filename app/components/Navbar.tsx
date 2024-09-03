@@ -11,7 +11,7 @@ export default function Navbar(props: { authenticated: string }): JSX.Element {
   };
 
   const getLinks = (mobile: boolean): JSX.Element => {
-    if (props.authenticated) {
+    if (props.authenticated === "true") {
       return (
         <div
           className={

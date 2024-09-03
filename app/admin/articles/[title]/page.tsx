@@ -16,22 +16,20 @@ export default async function Article({
     message: "",
   };
 
-  console.log(`Article title: ${params.title}`);
+  console.log(`Getting article with title ${params.title}`);
 
-  try {
-    console.log(`Getting article`);
+  connectToDB();
 
-    connectToDB();
+  const response: ActionResponse = await getArticleAction(params.title);
 
-    const response: ActionResponse = await getArticleAction(params.title);
-
+  if (!response.error) {
     console.log("Article has been fetched successfully");
 
     info = { ...info, success: true, article: response.articles[0] };
-  } catch (error: Error | any) {
-    console.log(`Error while getting article: ${error.message}`);
+  } else {
+    console.log(`Error while getting article: ${response.message}`);
 
-    info = { ...info, success: false, message: error.message };
+    info = { ...info, success: false, message: response.message };
   }
 
   return (

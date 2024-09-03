@@ -10,20 +10,20 @@ export default async function Articles() {
     message: "",
   };
 
-  try {
-    console.log("Getting articles");
+  console.log("Getting articles");
 
-    connectToDB();
+  connectToDB();
 
-    const response: ActionResponse = await getArticlesAction();
+  const response: ActionResponse = await getArticlesAction();
 
+  if (!response.error) {
     console.log("Articles have been fetched successfully");
 
     info = { ...info, success: true, articles: response.articles };
-  } catch (error: Error | any) {
-    console.log(`Error while getting articles: ${error.message}`);
+  } else {
+    console.log(`Error while getting articles: ${response.message}`);
 
-    info = { ...info, success: false, message: error.message };
+    info = { ...info, success: false, message: response.message };
   }
 
   return (

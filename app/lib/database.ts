@@ -8,16 +8,20 @@ const dbConfig: ClientConfig = {
   database: process.env.DB_NAME,
 };
 
-export const dbClient: any = new Client(dbConfig);
+export const dbClient: Client = new Client(dbConfig);
 
-export async function connectToDB() {
+let isConnected: boolean = false;
+
+export async function connectToDB(): Promise<void> {
   try {
-    if (!dbClient._connected) {
+    if (!isConnected) {
       await dbClient.connect();
 
-      console.log("Connected to database");
+      isConnected = true;
+    } else {
+      console.log("Already connected to database");
     }
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.log(
       `There is the following database connection error: ${error.message}`
     );

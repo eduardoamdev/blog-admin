@@ -3,14 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function Navbar(props: any) {
-  const [isClick, setIsClick] = useState(false);
+export default function Navbar(props: { authenticated: string }): JSX.Element {
+  const [isClick, setIsClick] = useState<boolean>(false);
 
   const toogleNavbar = (): void => {
     setIsClick(!isClick);
   };
 
-  const getLinks = (mobile: boolean) => {
+  const getLinks = (mobile: boolean): JSX.Element => {
     if (props.authenticated) {
       return (
         <div

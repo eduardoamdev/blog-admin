@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-export default function ArticleActions(props: any) {
+export default function ArticleActions(props: {
+  title: string | string[] | undefined;
+}): JSX.Element {
   return (
     <nav className="flex flex-row-reverse bg-gray-400 p-1">
       <Link

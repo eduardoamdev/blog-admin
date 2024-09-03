@@ -2,6 +2,6 @@
 
 import { redirect } from "next/navigation";
 
-export async function navigateAction(route: string) {
+export async function navigateAction(route: string): Promise<void> {
   redirect(route);
 }

@@ -1,5 +1,10 @@
 import { NextPageContext } from "next";
 
+export interface User {
+  username: string;
+  password: string;
+}
+
 export interface ArticlesActionResponse {
   articles: Article[];
   error: boolean;

@@ -2,8 +2,12 @@
 
 import bcrypt from "bcryptjs";
 import { connectToDB, dbClient } from "@/app/lib/database";
+import { User } from "@/app/interfaces";
 
-export async function signupAction(username: any, password: any) {
+export async function signupAction(
+  username: FormDataEntryValue | null,
+  password: FormDataEntryValue | null
+): Promise<string> {
   try {
     console.log(`Creating user with username ${username}`);
 
@@ -15,11 +19,13 @@ export async function signupAction(username: any, password: any) {
 
     await connectToDB();
 
-    const existentUser = await dbClient.query(
-      `select * from admin.users where username = '${username}'`
-    );
+    const existentUsers: User[] = (
+      await dbClient.query(
+        `select * from admin.users where username = '${username}'`
+      )
+    ).rows;
 
-    if (existentUser.rows.length) {
+    if (existentUsers.length) {
       console.log(`User with username ${username} already exists`);
 
       return "User with this username already exists";
@@ -27,7 +33,7 @@ export async function signupAction(username: any, password: any) {
 
     const salt: string = await bcrypt.genSalt(10);
 
-    const hashPass: string = await bcrypt.hash(password, salt);
+    const hashPass: string = await bcrypt.hash(password.toString(), salt);
 
     await dbClient.query(
       `insert into admin.users (username, password) values ('${username}', '${hashPass}')`
@@ -36,7 +42,7 @@ export async function signupAction(username: any, password: any) {
     console.log(`User with username ${username} has been created successfully`);
 
     return "Successful signup";
-  } catch (error: any) {
+  } catch (error: Error | any) {
     console.log(
       `Error while creating user with username ${username}: ${error.message}`
     );

@@ -4,22 +4,22 @@ import Navbar from "@/app/components/Navbar";
 import { signupAction } from "@/app/actions/signup/signupAction";
 import { useState } from "react";
 
-export default function Signup() {
-  let [message, setMessage] = useState("");
+export default function Signup(): JSX.Element {
+  let [message, setMessage] = useState<string>("");
 
-  async function submitUserAction(formData: FormData) {
-    const username = formData.get("username");
+  async function submitUserAction(formData: FormData): Promise<void> {
+    const username: FormDataEntryValue | null = formData.get("username");
 
-    const password = formData.get("password");
+    const password: FormDataEntryValue | null = formData.get("password");
 
-    const responseMessage = await signupAction(username, password);
+    const responseMessage: string = await signupAction(username, password);
 
     setMessage(responseMessage);
   }
 
   return (
     <main>
-      <Navbar />
+      <Navbar authenticated="false" />
       <div>
         <h2 className="text-center text-white non-italic font-bold pt-20 text-2xl md:text-4xl lg:text-5xl">
           Signup

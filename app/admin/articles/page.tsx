@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import { ActionResponse, ArticlesInfo } from "@/app/interfaces";
 import { getArticlesAction } from "@/app/actions/articles/getArticlesAction";
 
-export default async function Articles() {
+export default async function Articles(): Promise<JSX.Element> {
   let info: ArticlesInfo = {
     success: false,
     articles: [] as any[],

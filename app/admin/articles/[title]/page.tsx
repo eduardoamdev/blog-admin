@@ -1,4 +1,4 @@
-import { connectToDB, dbClient } from "@/app/lib/database";
+import { connectToDB } from "@/app/lib/database";
 import Navbar from "../../../components/Navbar";
 import ArticleActions from "@/app/components/ArticleActions";
 import { getArticleAction } from "@/app/actions/articles/getArticleAction";

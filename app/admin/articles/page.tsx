@@ -1,10 +1,12 @@
 import { connectToDB, dbClient } from "@/app/lib/database";
 import Navbar from "../../components/Navbar";
+import { ActionResponse } from "@/app/interfaces";
+import { getArticlesAction } from "@/app/actions/articles/getArticlesAction";
 
 export default async function Articles() {
   let info = {
     success: false,
-    articles: [],
+    articles: [] as any[],
     message: "",
   };
 
@@ -13,14 +15,12 @@ export default async function Articles() {
 
     connectToDB();
 
-    const articles = await dbClient.query(
-      "select a.title from admin.articles a"
-    );
+    const response: ActionResponse = await getArticlesAction();
 
     console.log("Articles have been fetched successfully");
 
-    info = { ...info, success: true, articles: articles.rows };
-  } catch (error: any) {
+    info = { ...info, success: true, articles: response.articles };
+  } catch (error: Error | any) {
     console.log(`Error while getting articles: ${error.message}`);
 
     info = { ...info, success: false, message: error.message };

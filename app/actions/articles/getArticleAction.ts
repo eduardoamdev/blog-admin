@@ -17,7 +17,7 @@ export async function getArticleAction(
       )
     ).rows;
 
-    if (!articles) throw new Error("Article not found");
+    if (!articles.length) throw new Error("Article not found");
 
     console.log("Article has been fetched successfully");
 

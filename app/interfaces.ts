@@ -17,8 +17,8 @@ export interface ArticleProps {
 
 export interface ArticleInfo {
   success: boolean;
-  article: Article;
   message: string;
+  article: Article;
 }
 
 export interface UpdateArticlesState {

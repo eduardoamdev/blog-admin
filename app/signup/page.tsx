@@ -35,7 +35,7 @@ export default function Signup(): JSX.Element {
             />
             <label className="non-italic text-white mt-10">Password</label>
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="password"
               className="mt-5 p-2"

@@ -6,7 +6,7 @@ API for managing the content of a personal blog.
 
 ## Prerequisites
 
-To run this project you need this programs installed in your operative system:
+To run this project, you need these programs installed in your operating system:
 
 - NodeJS
 
@@ -14,7 +14,7 @@ To run this project you need this programs installed in your operative system:
 
 - Docker
 
-## Create local database
+## Create a local database
 
 ```sh
 npm run createDbContainer
@@ -24,7 +24,7 @@ npm run createDbContainer
 npm run generateDbStructure
 ```
 
-## Insert admin user
+## Insert an admin user
 
 ```sh
 npm run insertAdminUser

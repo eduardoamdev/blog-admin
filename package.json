@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "createDbContainer": "node ./bin/createDbContainer.mjs",
+    "generateDbStructure": "node ./bin/generateDbStructure.mjs",
+    "insertAdminUser": "node ./bin/insertAdminUser.mjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -25,6 +28,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
+    "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.38",

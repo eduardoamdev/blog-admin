@@ -21,3 +21,19 @@ npm run dev
 ## Tailwind instalation
 
 https://nextjs.org/docs/app/building-your-application/styling/tailwind-css
+
+## Create local database
+
+```sh
+npm run createDbContainer
+```
+
+```sh
+npm run generateDbStructure
+```
+
+## Insert admin user
+
+```sh
+npm run insertAdminUser
+```

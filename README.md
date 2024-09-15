@@ -29,3 +29,13 @@ npm run generateDbStructure
 ```sh
 npm run insertAdminUser
 ```
+
+## Run the project
+
+```sh
+npm run dev
+```
+
+## Open on browser
+
+http://localhost:3000

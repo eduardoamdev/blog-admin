@@ -72,8 +72,12 @@ async function generateData() {
     await createArticlesTable();
 
     await dbClient.end();
+
+    process.exit(0);
   } catch (error) {
     console.log(`There is the following error: ${error.message}`);
+
+    process.exit(1);
   }
 }
 

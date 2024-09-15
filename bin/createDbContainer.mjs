@@ -30,8 +30,12 @@ const createContainer = async () => {
     );
 
     console.log("Database container pulled and running");
+
+    process.exit(0);
   } catch (error) {
     console.error("Error setting up database container:", error);
+
+    process.exit(1);
   }
 };
 

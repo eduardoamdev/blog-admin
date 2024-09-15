@@ -4,23 +4,15 @@
 
 API for managing the content of a personal blog.
 
-## Creation of the project
+## Prerequisites
 
-The project was created with the following command.
+To run this project you need this programs installed in your operative system:
 
-```sh
-npx create-next-app@latest blog-admin
-```
+- NodeJS
 
-## Running the project
+- NPM
 
-```sh
-npm run dev
-```
-
-## Tailwind instalation
-
-https://nextjs.org/docs/app/building-your-application/styling/tailwind-css
+- Docker
 
 ## Create local database
 

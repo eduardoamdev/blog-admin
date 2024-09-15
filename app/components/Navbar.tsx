@@ -40,12 +40,6 @@ export default function Navbar(props: { authenticated: string }): JSX.Element {
           }
         >
           <Link
-            href="/signup"
-            className="text-white lg:hover:bg-white lg:hover:text-black lg:rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
-          >
-            Signup
-          </Link>
-          <Link
             href="/login"
             className="text-white lg:hover:bg-white lg:hover:text-black lg:rounded-lg p-2 text-1xl md:text-1xl lg:text-2xl"
           >
